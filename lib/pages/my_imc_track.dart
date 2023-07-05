@@ -6,6 +6,9 @@ import 'login_page.dart';
 
 class MyImcTrack extends StatelessWidget {
   const MyImcTrack({super.key});
+
+
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -14,7 +17,10 @@ class MyImcTrack extends StatelessWidget {
       systemNavigationBarColor: Colors.black,
       systemNavigationBarIconBrightness: Brightness.light,
     ));
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     final textTheme = Theme.of(context).textTheme;
     return MaterialApp(

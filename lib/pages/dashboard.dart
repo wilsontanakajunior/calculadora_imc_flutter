@@ -1,6 +1,7 @@
 import 'package:calculadora_imc/models/info_newsletter_model.dart';
 import 'package:calculadora_imc/respositories/card_info_newsletter.dart';
 import 'package:calculadora_imc/widgets/card_info_newsletter.dart';
+import 'package:calculadora_imc/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardPage extends StatefulWidget {
@@ -59,7 +60,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        drawer: Drawer(),
+        drawer: CustomDrawer(),
         body: infoNewsLetterModel == null
             ? const LinearProgressIndicator()
             : Container(
