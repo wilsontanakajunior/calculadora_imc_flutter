@@ -1,3 +1,4 @@
+import 'package:calculadora_imc/pages/imc_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -78,8 +79,17 @@ class CustomDrawer extends StatelessWidget {
                     width: double.infinity,
                     height: 45,
                     child: InkWell(
-                      onTap: () {},
-                      child: Row(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ImcPage();
+                            },
+                          ),
+                        );
+                      },
+                      child: const Row(
                         children: [
                           Icon(Icons.home),
                           SizedBox(
