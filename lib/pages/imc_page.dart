@@ -1,4 +1,5 @@
 import 'package:calculadora_imc/models/imc_model.dart';
+import 'package:calculadora_imc/respositories/imc_repository.dart';
 import 'package:calculadora_imc/widgets/form_imc.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,20 @@ class ImcPage extends StatefulWidget {
 }
 
 class _ImcPageState extends State<ImcPage> {
-  final formKey = GlobalKey<FormState>();
-  var imcCalc = const ImcModel();
+  ImcRepository imcRespository = ImcRepository();
+  List<ImcModel> _imcs = <ImcModel>[];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    obterImcs();
+  }
+
+  void obterImcs() async {
+    _imcs = await imcRespository.listarImcs();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,63 +52,22 @@ class _ImcPageState extends State<ImcPage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return SizedBox(
-                    height: 200,
-                    width: double.infinity,
-                    child: AlertDialog(
-                      title: const Text(
-                        "Registrar IMC",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      content: SizedBox(
-                        height: 150,
-                        child: FomrImc(
-                          formKey: formKey,
-                          imcCalc: imcCalc,
-                        ),
-                      ),
-                      actions: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text(
-                            "Cancelar",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              formKey.currentState!.save();
-                              print(imcCalc.peso);
-                            }
-
-                            // Navigator.of(context).pop();
-                          },
-                          child: const Text(
-                            "Registrar",
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                });
+              context: context,
+              builder: (BuildContext context) {
+                return FomrImc();
+              },
+            );
+            setState(() {});
           },
           child: const Icon(
             Icons.add_box,
           ),
         ),
-        body: Container(),
+        body: _imcs.length < 1
+            ? CircularProgressIndicator()
+            : Container(
+                child: Text("${_imcs[0].resultadoImc}"),
+              ),
       ),
     );
   }

@@ -4,26 +4,26 @@ import 'package:flutter/material.dart';
 class ImcModel {
   final double? peso;
   final double? altura;
-  final DateTime? dataPesage;
+  final DateTime? dataPesagem;
   final double? resultadoImc;
 
   const ImcModel({
     this.peso,
     this.altura,
-    this.dataPesage,
+    this.dataPesagem,
     this.resultadoImc,
   });
 
   ImcModel copyWith({
     double? peso,
     double? altura,
-    DateTime? dataPesage,
+    DateTime? dataPesagem,
     double? resultadoImc,
   }) {
     return ImcModel(
       peso: peso ?? this.peso,
       altura: altura ?? this.altura,
-      dataPesage: dataPesage ?? this.dataPesage,
+      dataPesagem: dataPesagem ?? this.dataPesagem,
       resultadoImc: resultadoImc ?? this.resultadoImc,
     );
   }
