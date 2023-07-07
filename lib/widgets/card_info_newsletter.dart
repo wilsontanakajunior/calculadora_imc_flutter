@@ -19,7 +19,7 @@ class _CardIndoNewletterState extends State<CardIndoNewletter> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10),
       height: 200,
       child: Card(
         elevation: 3,

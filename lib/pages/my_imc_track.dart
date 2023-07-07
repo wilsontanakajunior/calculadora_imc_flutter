@@ -7,8 +7,6 @@ import 'login_page.dart';
 class MyImcTrack extends StatelessWidget {
   const MyImcTrack({super.key});
 
-
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -29,10 +27,10 @@ class MyImcTrack extends StatelessWidget {
       home: const LoginPage(),
       theme: ThemeData(
         primaryColor: const Color(0xFFFFFFFF),
-        secondaryHeaderColor: Color.fromARGB(255, 53, 192, 62),
+        secondaryHeaderColor: const Color.fromARGB(255, 53, 192, 62),
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.green,
-          backgroundColor: Color.fromARGB(255, 53, 192, 62),
+          backgroundColor: const Color.fromARGB(255, 53, 192, 62),
         ),
         appBarTheme: const AppBarTheme(elevation: 4),
         useMaterial3: true,

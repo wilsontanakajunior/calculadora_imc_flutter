@@ -1,11 +1,12 @@
 import 'package:calculadora_imc/models/imc_model.dart';
+import 'package:calculadora_imc/pages/imc_page.dart';
 import 'package:calculadora_imc/respositories/imc_repository.dart';
 import 'package:calculadora_imc/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';
 
 class FomrImc extends StatelessWidget {
-  FomrImc({super.key});
-
+  FomrImc({super.key, required this.onImcAdded});
+  final void Function() onImcAdded;
   final formKey = GlobalKey<FormState>();
 
   var imcCalc = const ImcModel();
@@ -101,7 +102,8 @@ class FomrImc extends StatelessWidget {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
                 ImcRepository().adicionarNovoImc(imcModel: imcCalc);
-                Navigator.of(context).pop();
+                Navigator.pop(context);
+                onImcAdded();
               }
             },
             child: const Text(

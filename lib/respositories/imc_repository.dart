@@ -1,7 +1,7 @@
 import 'package:calculadora_imc/models/imc_model.dart';
 
 class ImcRepository {
-  final List<ImcModel> _imcs = [];
+  static final List<ImcModel> _imcs = [];
 
   Future<void> adicionarNovoImc({required ImcModel imcModel}) async {
     var now = DateTime.now();
@@ -12,6 +12,6 @@ class ImcRepository {
 
   Future<List<ImcModel>> listarImcs() async {
     await Future.delayed(const Duration(seconds: 1));
-    return _imcs;
+    return List<ImcModel>.from(_imcs);
   }
 }

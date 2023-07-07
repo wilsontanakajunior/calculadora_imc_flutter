@@ -12,7 +12,9 @@ class FormLogin extends StatefulWidget {
 class _FormLoginState extends State<FormLogin> {
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
+
   bool _visibility = true;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,12 +42,12 @@ class _FormLoginState extends State<FormLogin> {
                   ),
                   hintText: "Email",
                   hintStyle: const TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                   labelText: "Email",
                   labelStyle: const TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                   prefixIcon: const Icon(
@@ -72,12 +74,12 @@ class _FormLoginState extends State<FormLogin> {
                   ),
                   hintText: "Senha",
                   hintStyle: const TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                   labelText: "Senha",
                   labelStyle: const TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                   prefixIcon: const Icon(
@@ -117,6 +119,7 @@ class _FormLoginState extends State<FormLogin> {
               onPressed: () {
                 if (_loginController.text != "123" ||
                     _senhaController.text != '123') {
+                  print("AQUI");
                   showDialog(
                     context: context,
                     builder: (BuildContext bc) {
@@ -127,15 +130,16 @@ class _FormLoginState extends State<FormLogin> {
                       );
                     },
                   );
+                } else {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext bc) {
+                        return DashBoardPage();
+                      },
+                    ),
+                  );
                 }
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext bc) {
-                      return DashBoardPage();
-                    },
-                  ),
-                );
               },
               child: const Text(
                 "Entrar",

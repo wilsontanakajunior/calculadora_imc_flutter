@@ -1,12 +1,13 @@
 import 'package:calculadora_imc/models/info_newsletter_model.dart';
 import 'package:calculadora_imc/respositories/card_info_newsletter.dart';
+import 'package:calculadora_imc/respositories/imc_repository.dart';
 import 'package:calculadora_imc/widgets/card_info_newsletter.dart';
 import 'package:calculadora_imc/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardPage extends StatefulWidget {
   DashBoardPage({super.key});
-
+  final ImcRepository imcRepository = ImcRepository();
   @override
   State<DashBoardPage> createState() => _DashBoardPageState();
 }
@@ -60,7 +61,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        drawer: CustomDrawer(),
+        drawer: CustomDrawer(imcRepository: widget.imcRepository),
         body: infoNewsLetterModel == null
             ? const LinearProgressIndicator()
             : Container(

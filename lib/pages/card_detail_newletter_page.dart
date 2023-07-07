@@ -53,7 +53,7 @@ class _CardDetailNewletterPageState extends State<CardDetailNewletterPage> {
             elevation: 0,
             shadowColor: Colors.grey,
             child: Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 8,
                 horizontal: 16,
               ),
@@ -100,7 +100,7 @@ class _CardDetailNewletterPageState extends State<CardDetailNewletterPage> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 300,
                     width: double.infinity,
                     child: YoutubePlayer(
@@ -113,7 +113,7 @@ class _CardDetailNewletterPageState extends State<CardDetailNewletterPage> {
                       },
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
                 ],
@@ -125,12 +125,3 @@ class _CardDetailNewletterPageState extends State<CardDetailNewletterPage> {
     );
   }
 }
-
-//  Expanded(
-//                     child: InAppWebView(
-//                       initialUrlRequest: URLRequest(
-//                         url: Uri.parse(
-//                             'https://www.youtube.com/watch?v=S7ES9GVIG3U'),
-//                       ),
-//                     ),
-//                   ),

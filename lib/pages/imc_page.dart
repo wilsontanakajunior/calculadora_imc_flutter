@@ -1,19 +1,20 @@
 import 'package:calculadora_imc/models/imc_model.dart';
 import 'package:calculadora_imc/respositories/imc_repository.dart';
+import 'package:calculadora_imc/widgets/card_result_imc.dart';
 import 'package:calculadora_imc/widgets/form_imc.dart';
 import 'package:flutter/material.dart';
 
 class ImcPage extends StatefulWidget {
-  const ImcPage({super.key});
+  const ImcPage({super.key, required this.imcRepository});
 
+  final ImcRepository imcRepository;
   @override
   State<ImcPage> createState() => _ImcPageState();
 }
 
 class _ImcPageState extends State<ImcPage> {
-  ImcRepository imcRespository = ImcRepository();
   List<ImcModel> _imcs = <ImcModel>[];
-
+  bool _carregando = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -22,8 +23,17 @@ class _ImcPageState extends State<ImcPage> {
   }
 
   void obterImcs() async {
-    _imcs = await imcRespository.listarImcs();
+    _carregando = true;
     setState(() {});
+    _imcs = await widget.imcRepository.listarImcs();
+    _carregando = false;
+    setState(() {});
+  }
+
+  void atualizarImcs() {
+    setState(() {
+      obterImcs();
+    });
   }
 
   @override
@@ -55,7 +65,9 @@ class _ImcPageState extends State<ImcPage> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return FomrImc();
+                return FomrImc(
+                  onImcAdded: atualizarImcs,
+                );
               },
             );
             setState(() {});
@@ -64,11 +76,33 @@ class _ImcPageState extends State<ImcPage> {
             Icons.add_box,
           ),
         ),
-        body: _imcs.length < 1
-            ? CircularProgressIndicator()
-            : Container(
-                child: Text("${_imcs[0].resultadoImc}"),
-              ),
+        body: _carregando
+            ? const LinearProgressIndicator()
+            : _imcs.isEmpty
+                ? const SizedBox(
+                    child: Center(
+                      child: Text(
+                        "Nenhuma pesagem registrada!",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 15,
+                    ),
+                    child: ListView.builder(
+                      itemCount: _imcs.length,
+                      itemBuilder: (context, index) {
+                        return CardResulImc(imcs: _imcs[index]);
+                      },
+                    ),
+                  ),
       ),
     );
   }
