@@ -23,6 +23,7 @@ class _ImcPageState extends State<ImcPage> {
 
   void obterImcs() async {
     _imcs = await imcRespository.listarImcs();
+    setState(() {});
   }
 
   @override
