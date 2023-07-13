@@ -1,5 +1,6 @@
 import 'package:calculadora_imc/models/imc_model.dart';
 import 'package:calculadora_imc/respositories/imc_repository.dart';
+import 'package:calculadora_imc/respositories/imc_sqlite_repository.dart';
 import 'package:calculadora_imc/widgets/card_result_imc.dart';
 import 'package:calculadora_imc/widgets/form_imc.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,9 @@ class ImcPage extends StatefulWidget {
 }
 
 class _ImcPageState extends State<ImcPage> {
+  ImcSQLiteRepository imcSQLiteRepository = ImcSQLiteRepository();
+  
+
   List<ImcModel> _imcs = <ImcModel>[];
   bool _carregando = true;
   @override

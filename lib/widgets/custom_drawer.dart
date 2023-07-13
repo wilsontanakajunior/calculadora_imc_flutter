@@ -122,7 +122,6 @@ class CustomDrawer extends StatelessWidget {
                             return Container(
                               padding: const EdgeInsets.all(20),
                               width: double.infinity,
-                              height: MediaQuery.of(context).size.height * 0.5,
                               child: Column(
                                 children: [
                                   const Text(
