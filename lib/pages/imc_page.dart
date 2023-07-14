@@ -15,9 +15,8 @@ class ImcPage extends StatefulWidget {
 
 class _ImcPageState extends State<ImcPage> {
   ImcSQLiteRepository imcSQLiteRepository = ImcSQLiteRepository();
-  
+  var _imcSQL = <ImcModel>[];
 
-  List<ImcModel> _imcs = <ImcModel>[];
   bool _carregando = true;
   @override
   void initState() {
@@ -29,7 +28,7 @@ class _ImcPageState extends State<ImcPage> {
   void obterImcs() async {
     _carregando = true;
     setState(() {});
-    _imcs = await widget.imcRepository.listarImcs();
+    _imcSQL = await imcSQLiteRepository.obterImcs();
     _carregando = false;
     setState(() {});
   }
@@ -82,7 +81,7 @@ class _ImcPageState extends State<ImcPage> {
         ),
         body: _carregando
             ? const LinearProgressIndicator()
-            : _imcs.isEmpty
+            : _imcSQL.isEmpty
                 ? const SizedBox(
                     child: Center(
                       child: Text(
@@ -101,9 +100,11 @@ class _ImcPageState extends State<ImcPage> {
                       horizontal: 15,
                     ),
                     child: ListView.builder(
-                      itemCount: _imcs.length,
+                      itemCount: _imcSQL.length,
                       itemBuilder: (context, index) {
-                        return CardResulImc(imcs: _imcs[index]);
+                        return CardResulImc(
+                          imcs: _imcSQL[index],
+                        );
                       },
                     ),
                   ),

@@ -119,7 +119,6 @@ class _FormLoginState extends State<FormLogin> {
               onPressed: () {
                 if (_loginController.text != "123" ||
                     _senhaController.text != '123') {
-                  print("AQUI");
                   showDialog(
                     context: context,
                     builder: (BuildContext bc) {

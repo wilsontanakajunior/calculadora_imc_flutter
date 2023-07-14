@@ -2,9 +2,10 @@ import 'package:calculadora_imc/models/imc_model.dart';
 import 'package:calculadora_imc/respositories/sqlite/database.dart';
 
 class ImcSQLiteRepository {
+
   Future<List<ImcModel>> obterImcs() async {
     var db = await SQLiteDataBase().obterDataBase();
-    ImcModel imcModel = ImcModel();
+    ImcModel imcModel = const ImcModel();
     List<ImcModel> pesagens = [];
     var result = await db.rawQuery("SELECT * FROM pesagens");
     for (var element in result) {
@@ -23,11 +24,11 @@ class ImcSQLiteRepository {
   Future<void> salvar(ImcModel imcModel) async {
     var db = await SQLiteDataBase.iniciarBancoDeDados();
     await db.rawInsert(
-      'INSERT INTO pesagens (peso, altura, dataPesagem, resultadoImc) value(?,?,?,?)',
+      'INSERT INTO pesagens (peso, altura, dataPesagem, resultadoImc) values (?,?,?,?)',
       [
         imcModel.peso,
         imcModel.altura,
-        imcModel.dataPesagem,
+        imcModel.dataPesagem.toString(),
         imcModel.resultadoImc,
       ],
     );

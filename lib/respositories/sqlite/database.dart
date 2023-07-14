@@ -1,8 +1,7 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart' as path;
 
-Map<int, String> scrips = {
+Map<int, String> scripts = {
   1: ''' CREATE TABLE pesagens (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     peso REAL,
@@ -28,14 +27,15 @@ class SQLiteDataBase {
         await getDatabasesPath(),
         'database.db',
       ),
+      version: scripts.length,
       onCreate: (Database db, int version) async {
-        for (var i = 1; i <= scrips.length; i++) {
-          await db.execute(scrips[i]!);
+        for (var i = 1; i <= scripts.length; i++) {
+          await db.execute(scripts[i]!);
         }
       },
       onUpgrade: (Database db, int oldVersion, int newVersion) async {
-        for (var i = oldVersion + 1; i <= scrips.length; i++) {
-          await db.execute(scrips[i]!);
+        for (var i = oldVersion + 1; i <= scripts.length; i++) {
+          await db.execute(scripts[i]!);
         }
       },
     );

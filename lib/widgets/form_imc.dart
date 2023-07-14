@@ -1,18 +1,18 @@
 import 'package:calculadora_imc/models/imc_model.dart';
-
-import 'package:calculadora_imc/respositories/imc_repository.dart';
 import 'package:calculadora_imc/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';
 
+import '../respositories/imc_sqlite_repository.dart';
+
 class FomrImc extends StatelessWidget {
-  FomrImc({
-    super.key,
-    required this.onImcAdded,
-  });
+  FomrImc({super.key, required this.onImcAdded});
+  
   final void Function() onImcAdded;
   final formKey = GlobalKey<FormState>();
 
-  var imcCalc = const ImcModel();
+  late var imcCalc = const ImcModel();
+
+  final ImcSQLiteRepository imcSQLiteRepository = ImcSQLiteRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,14 @@ class FomrImc extends StatelessWidget {
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-                ImcRepository().adicionarNovoImc(imcModel: imcCalc);
+                var result =
+                    imcCalc.peso! / (imcCalc.altura! * imcCalc.altura!);
+
+                imcCalc = imcCalc.copyWith(
+                    resultadoImc: double.parse(result.toStringAsFixed(2)));
+                imcCalc = imcCalc.copyWith(dataPesagem: DateTime.now());
+                //ImcRepository().adicionarNovoImc(imcModel: imcCalc);
+                imcSQLiteRepository.salvar(imcCalc);
                 Navigator.pop(context);
                 onImcAdded();
               }

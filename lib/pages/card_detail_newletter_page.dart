@@ -108,8 +108,6 @@ class _CardDetailNewletterPageState extends State<CardDetailNewletterPage> {
                       showVideoProgressIndicator: true,
                       progressIndicatorColor: Colors.red,
                       onReady: () {
-                        // Executa alguma ação quando o player estiver pronto
-                        print('Player pronto');
                       },
                     ),
                   ),
